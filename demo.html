@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>无线信号分解与可视化演示 (Canvas版)</title>
+    <title>Demo</title>
     <style>
         body {
             font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -13,7 +13,6 @@
             color: #333;
         }
 
-        /* 顶部控制面板 */
         #control-panel {
             background-color: #fff;
             padding: 15px 20px;
@@ -73,7 +72,6 @@
             border-radius: 4px;
         }
 
-        /* 下方可视化面板 */
         #plot-area {
             padding: 20px;
             max-width: 1200px;
@@ -99,7 +97,6 @@
             text-align: center;
         }
 
-        /* Canvas 样式 */
         canvas {
             display: block;
             margin: 0 auto;
@@ -108,7 +105,6 @@
             border: 1px solid #eee;
         }
         
-        /* 特别为频谱图设置高度 */
         #canvas-spectrogram {
             height: 300px; 
             width: 100%;
@@ -120,7 +116,7 @@
         }
         
         #canvas-total {
-            height: 200px; /* 总信号稍微高一点 */
+            height: 200px;
         }
     </style>
 </head>
@@ -128,40 +124,40 @@
 
     <div id="control-panel">
         <div class="control-group">
-            <div class="control-group-title">稳态设置 (Steady-state)</div>
+            <div class="control-group-title">Steady-state</div>
             <div class="slider-wrapper">
-                <label>频率 (Hz)</label>
+                <label>Frequency (Hz)</label>
                 <input type="range" id="ss-freq" min="20" max="400" step="1" value="100">
                 <span id="ss-freq-val">100</span>
             </div>
             <div class="slider-wrapper">
-                <label>幅度</label>
+                <label>Amplitude</label>
                 <input type="range" id="ss-amp" min="0" max="2" step="0.05" value="1.0">
                 <span id="ss-amp-val">1.00</span>
             </div>
         </div>
         <div class="control-group">
-            <div class="control-group-title">瞬态设置 (Transient)</div>
+            <div class="control-group-title">Transient</div>
             <div class="slider-wrapper">
-                <label>脉冲位置 (s)</label>
+                <label>Position (s)</label>
                 <input type="range" id="tr-pos" min="0.1" max="1.9" step="0.01" value="0.5">
                 <span id="tr-pos-val">0.50</span>
             </div>
             <div class="slider-wrapper">
-                <label>脉冲宽度 (s)</label>
+                <label>Length (s)</label>
                 <input type="range" id="tr-width" min="0.01" max="0.2" step="0.005" value="0.05">
                 <span id="tr-width-val">0.050</span>
             </div>
             <div class="slider-wrapper">
-                <label>脉冲幅度</label>
+                <label>Amplitude</label>
                 <input type="range" id="tr-amp" min="0" max="4" step="0.1" value="2.0">
                 <span id="tr-amp-val">2.0</span>
             </div>
         </div>
         <div class="control-group">
-            <div class="control-group-title">噪声设置 (Noise)</div>
+            <div class="control-group-title">Noise</div>
             <div class="slider-wrapper">
-                <label>噪声幅度 (SD)</label>
+                <label>Amplitude (SD)</label>
                 <input type="range" id="noise-amp" min="0" max="2" step="0.01" value="0.5">
                 <span id="noise-amp-val">0.50</span>
             </div>
@@ -170,27 +166,27 @@
 
     <div id="plot-area">
         <div class="plot-container">
-            <div class="plot-title">混合总信号 (S+T+N)</div>
+            <div class="plot-title">Mixed Signal (S+T+N)</div>
             <canvas id="canvas-total" class="canvas-1d"></canvas>
         </div>
         
         <div class="plot-container">
-            <div class="plot-title">频谱图 (Spectrogram: Time vs Frequency)</div>
+            <div class="plot-title">Spectrogram: Time vs Frequency</div>
             <canvas id="canvas-spectrogram"></canvas>
         </div>
 
         <div class="plot-container" style="border-left: 4px solid #4CAF50;">
-            <div class="plot-title" style="color: #4CAF50;">稳态信号</div>
+            <div class="plot-title" style="color: #4CAF50;">Steady</div>
             <canvas id="canvas-ss" class="canvas-1d"></canvas>
         </div>
         
         <div class="plot-container" style="border-left: 4px solid #FF9800;">
-            <div class="plot-title" style="color: #FF9800;">瞬态信号</div>
+            <div class="plot-title" style="color: #FF9800;">Transient</div>
             <canvas id="canvas-tr" class="canvas-1d"></canvas>
         </div>
         
         <div class="plot-container" style="border-left: 4px solid #9E9E9E;">
-            <div class="plot-title" style="color: #9E9E9E;">噪声信号</div>
+            <div class="plot-title" style="color: #9E9E9E;">Noise</div>
             <canvas id="canvas-noise" class="canvas-1d"></canvas>
         </div>
     </div>
